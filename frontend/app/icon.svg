@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Logo CariSkripsi: kaca pembesar (lensa krem + gagang terakota) di atas kotak navy. -->
+  <rect width="64" height="64" rx="14" fill="#27325a"/>
+  <path d="M38.5 38.5 L50 50" stroke="#e0855a" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="27.5" cy="27.5" r="14" fill="none" stroke="#f7f6f2" stroke-width="6"/>
+  <path d="M21 24.5h13M21 30.5h9" stroke="#f7f6f2" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
+</svg>

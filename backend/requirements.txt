@@ -1,0 +1,27 @@
+# Runtime (dipakai server lokal maupun server online di Hugging Face Spaces)
+# torch CPU dipasang terpisah: pip install torch --index-url https://download.pytorch.org/whl/cpu
+fastapi==0.165.0
+uvicorn[standard]==0.54.0
+python-multipart==0.0.33
+sqlalchemy==2.1.9
+psycopg[binary]==3.3.9  # driver PostgreSQL (Supabase)
+httpx==0.28.1  # Supabase Storage (cadangan file indeks)
+langdetect==1.0.9
+
+# Pencarian
+rank-bm25==0.2.2
+PySastrawi==1.2.1
+numpy==2.3.5
+sentence-transformers==6.3.0
+
+# Terjemahan & model
+transformers==5.23.0
+sentencepiece==0.2.3
+sacremoses==0.2.0
+huggingface_hub==2.4.0
+
+# Admin
+bcrypt==5.0.0
+itsdangerous==2.2.0
+openpyxl==3.1.5
+defusedxml==0.7.1  # dipakai otomatis oleh openpyxl untuk menolak XML berbahaya pada file unggahan

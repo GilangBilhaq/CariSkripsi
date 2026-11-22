@@ -1,0 +1,15 @@
+# SITE_ADDRESS (di deploy/.env):
+#   ":80"            HTTP biasa (dipakai bila HTTPS sudah diurus proxy/domain dari penyedia VPS)
+#   "nama.domain.id" HTTPS otomatis Let's Encrypt (butuh port 80 dan 443 publik mengarah ke VPS ini)
+{$SITE_ADDRESS}
+
+encode zstd gzip
+
+# API langsung ke backend (tanpa lewat Next.js): lebih ringan, dan IP asli pengunjung sampai ke backend.
+handle /api/* {
+	reverse_proxy backend:8080
+}
+
+handle {
+	reverse_proxy frontend:3000
+}

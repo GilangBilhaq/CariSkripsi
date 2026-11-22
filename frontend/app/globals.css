@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* Token desain CariSkripsi (diambil dari mockup di folder UI CariSkripsi/). */
+@theme {
+  --color-paper: #f7f6f2;        /* latar halaman publik */
+  --color-surface: #ffffff;      /* kartu */
+  --color-mist: #eef1f7;         /* latar admin & panel info */
+  --color-line: #e3e1dc;         /* garis/border */
+  --color-ink: #1c2230;          /* teks utama */
+  --color-muted: #5f6675;        /* teks sekunder */
+  --color-navy: #27325a;         /* aksi utama */
+  --color-navy-dark: #1b2444;
+  --color-bm25: #1f6f63;         /* Kata (BM25) */
+  --color-bm25-soft: #e3f3ef;
+  --color-sbert: #b4532a;        /* Makna (IndoSBERT) */
+  --color-sbert-dark: #7a2e12;
+  --color-sbert-soft: #fbece4;
+  --color-mark: #fdf1c7;         /* sorotan kata kunci */
+  --color-danger: #c62828;
+  --color-danger-soft: #fdecea;
+  --color-warn: #8a4b00;
+  --color-warn-soft: #fff4e0;
+
+  /* Warna mark grafik (lolos validasi buta warna; teks tetap memakai --color-bm25/--color-sbert). */
+  --color-chart-bm25: #0a8a74;
+  --color-chart-sbert: #b4532a;
+  --color-chart-neutral: #8a8f9c;
+  --color-chart-navy: #4a5bb0;   /* grafik satu seri (tahun) & bahasa Inggris */
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-newsreader);
+  --font-mono: var(--font-jetbrains);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+mark {
+  background: var(--color-mark);
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 2px;
+}

@@ -1,0 +1,24 @@
+# Data, database, indeks, dan rahasia (dibuat ulang lewat langkah di README)
+data/
+!data/.gitkeep
+dataset_skripsi_unej.csv
+*.csv
+
+# Python
+backend/.venv/
+**/__pycache__/
+**/.pytest_cache/
+
+# Node / Next.js (frontend/.gitignore mengatur sisanya)
+frontend/node_modules/
+frontend/.next/
+
+# Rahasia deploy
+deploy.env
+
+# Dokumen & aset non-sistem
+*.pdf
+UI CariSkripsi/
+tasks/
+*.md
+

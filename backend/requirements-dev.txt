@@ -1,0 +1,4 @@
+# Untuk pengembangan dan tes: pip install -r requirements-dev.txt
+-r requirements.txt
+pytest
+pgserver==0.1.4  # PostgreSQL lokal untuk menjalankan tes pada PostgreSQL (opsional)

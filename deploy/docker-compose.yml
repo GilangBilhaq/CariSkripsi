@@ -1,0 +1,49 @@
+# CariSkripsi di satu VPS: Caddy (pintu masuk) -> frontend (Next.js) + backend (FastAPI).
+# Di VPS folder ini berada di /opt/cariskripsi/deploy; data di /opt/cariskripsi/data.
+# Nilai rahasia/situs dibaca dari /opt/cariskripsi/deploy/.env (dibuat oleh scripts/deploy_vps.py).
+
+services:
+  backend:
+    build: ../backend
+    restart: unless-stopped
+    environment:
+      CARISKRIPSI_SECRET_KEY: ${CARISKRIPSI_SECRET_KEY}
+      CARISKRIPSI_COOKIE_SECURE: ${COOKIE_SECURE:-0}
+      CARISKRIPSI_TRUST_FORWARDED_FOR: "1"  # hanya Caddy yang bisa menjangkau backend
+      PORT: "8080"
+    volumes:
+      - ../data:/home/user/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/api/health', timeout=10)"]
+      interval: 60s
+      timeout: 15s
+      start_period: 180s
+      retries: 3
+
+  frontend:
+    build: ../frontend
+    restart: unless-stopped
+    environment:
+      BACKEND_URL: http://backend:8080
+    depends_on:
+      - backend
+
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:-:80}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  caddy_data:
+  caddy_config:
