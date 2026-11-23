@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// `short` dipakai di layar HP supaya ketiga tautan muat dalam satu baris.
+// `short` dipakai di layar HP supaya tautan muat dalam satu baris.
+// Evaluasi Model sengaja tidak ada di sini: hanya admin yang melihatnya (/admin/evaluasi).
 const LINKS = [
   { href: "/", label: "Pencarian", short: "Pencarian", match: (p: string) => p === "/" || p.startsWith("/cari") || p.startsWith("/dokumen") },
   { href: "/bandingkan", label: "Mode Bandingkan", short: "Bandingkan", match: (p: string) => p.startsWith("/bandingkan") },
-  { href: "/evaluasi", label: "Evaluasi Model", short: "Evaluasi", match: (p: string) => p.startsWith("/evaluasi") },
 ];
 
 /** Navigasi utama. Varian `static` (tanpa penanda halaman aktif) dipakai sebagai fallback Suspense. */
@@ -21,7 +21,7 @@ function ActiveNavList() {
 
 function NavList({ pathname }: { pathname: string | null }) {
   return (
-    <nav aria-label="Navigasi utama" className="grid grid-cols-3 text-sm sm:flex sm:gap-8 sm:text-base">
+    <nav aria-label="Navigasi utama" className="grid grid-cols-2 text-sm sm:flex sm:gap-8 sm:text-base">
       {LINKS.map((l) => {
         const active = pathname !== null && l.match(pathname);
         return (

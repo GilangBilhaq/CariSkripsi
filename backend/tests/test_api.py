@@ -306,9 +306,17 @@ def test_evaluation_flow(admin, session_factory):
 
     run = admin.post("/api/admin/eval/run").json()
     assert run["jumlah_kueri"] == 1 and run["ringkasan"]["belum_diselesaikan"] == 0
-    assert admin.get("/api/evaluation/latest").json()["run"]["id"] == run["id"]
+    assert admin.get("/api/admin/eval/runs").json()[0]["id"] == run["id"]
     csv_text = admin.get(f"/api/admin/eval/runs/{run['id']}/export.csv").content.decode("utf-8-sig")
     assert "energi biomassa" in csv_text and "RATA-RATA" in csv_text
+
+    # hasil evaluasi hanya untuk admin: tanpa login tidak bisa dibaca, dan tidak ada endpoint publiknya
+    cookies = dict(admin.cookies)
+    admin.cookies.clear()
+    assert admin.get("/api/admin/eval/runs").status_code == 401
+    assert admin.get(f"/api/admin/eval/runs/{run['id']}").status_code == 401
+    assert admin.get("/api/evaluation/latest").status_code == 404
+    admin.cookies.update(cookies)
 
     # mengubah teks kueri menghapus pool dan penilaian lama
     admin.put(f"/api/admin/eval/queries/{q['id']}", json={"teks": "briket jagung", "kategori": "kata_kunci"})

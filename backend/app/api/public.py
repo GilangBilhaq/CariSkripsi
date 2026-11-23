@@ -1,4 +1,4 @@
-"""API publik (tanpa login): pencarian, mode Bandingkan, detail dokumen, statistik, dan hasil evaluasi."""
+"""API publik (tanpa login): pencarian, mode Bandingkan, detail dokumen, dan statistik."""
 
 import math
 from typing import Literal
@@ -10,8 +10,7 @@ from sqlalchemy.orm import Session
 from app import config
 from app.api.deps import get_active_index, get_index_manager, get_semantic_index, get_session, require_semantic
 from app.api.serializers import document_full, document_summary, highlighted
-from app.eval.public import public_evaluation
-from app.models import Document, EvalRun, SearchLog
+from app.models import Document, SearchLog
 from app.search.highlight import highlight_full, make_snippet, query_terms
 from app.search.index_manager import IndexBundle, IndexManager
 from app.search.service import Hit, SearchFilters, compare, rank, similar_documents
@@ -169,9 +168,5 @@ def document_detail(
     return document_full(doc) | {"serupa": similar, "terindeks": not doc.perlu_indeks}
 
 
-@router.get("/evaluation/latest")
-def latest_evaluation(session: Session = Depends(get_session)):
-    run = session.scalar(select(EvalRun).order_by(EvalRun.id.desc()))
-    if run is None:
-        return {"run": None}
-    return {"run": public_evaluation(run)}
+# Hasil evaluasi sengaja TIDAK disediakan di API publik: hanya admin yang boleh melihatnya
+# (lihat /api/admin/eval/runs di admin_eval.py).

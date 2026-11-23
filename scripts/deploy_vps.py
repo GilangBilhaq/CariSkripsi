@@ -60,6 +60,8 @@ class Server:
         self.port = env.get("VPS_PORT", "22")
         self.target = f"{env['VPS_USER']}@{env['VPS_HOST']}"
         self.opts = ["-o", "BatchMode=yes", "-o", "ServerAliveInterval=30"]
+        if env.get("VPS_KEY"):  # kunci khusus deploy (tanpa passphrase), mis. ~/.ssh/cariskripsi_vps
+            self.opts += ["-i", str(Path(env["VPS_KEY"]).expanduser()), "-o", "IdentitiesOnly=yes"]
 
     def run(self, script: str, check: bool = True) -> int:
         """Jalankan skrip bash di server (lewat stdin, jadi tidak ada masalah tanda kutip)."""

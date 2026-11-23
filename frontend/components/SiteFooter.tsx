@@ -19,7 +19,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="mx-auto max-w-7xl border-t border-line px-4 py-4 text-xs text-muted sm:px-8">
-        © 2026 CariSkripsi · Proyek UTS Information Retrieval, Universitas Jember
+        © 2026 CariSkripsi · Universitas Jember
       </div>
     </footer>
   );

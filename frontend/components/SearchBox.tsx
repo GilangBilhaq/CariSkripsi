@@ -5,10 +5,9 @@ import { useState } from "react";
 import { type SearchMode, searchHref } from "@/lib/search-href";
 import { ArrowRightIcon, CompareIcon, SearchIcon } from "./icons";
 
-// `detail` disembunyikan di layar HP supaya ketiga pilihan muat dalam satu baris.
-const MODES: { value: SearchMode; label: string; detail?: string; dot?: string }[] = [
-  { value: "bm25", label: "Kata", detail: "(BM25)", dot: "bg-bm25" },
-  { value: "sbert", label: "Makna", detail: "(IndoSBERT)", dot: "bg-sbert" },
+const MODES: { value: SearchMode; label: string; dot?: string }[] = [
+  { value: "bm25", label: "Kata", dot: "bg-bm25" },
+  { value: "sbert", label: "Makna", dot: "bg-sbert" },
   { value: "compare", label: "Bandingkan" },
 ];
 
@@ -102,7 +101,6 @@ export function SearchBox({ initialQuery = "", initialMode = "bm25", variant = "
               >
                 {m.dot ? <span aria-hidden className={`size-2 shrink-0 rounded-full ${m.dot}`} /> : <CompareIcon size={14} />}
                 {m.label}
-                {m.detail && <span className="-ml-1 hidden sm:inline">{m.detail}</span>}
               </button>
             );
           })}

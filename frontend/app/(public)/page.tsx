@@ -23,9 +23,6 @@ export default function HomePage() {
           <Logo size="xl" />
         </h1>
         <p className="font-serif text-xl sm:text-2xl">Cari dengan kata, temukan dengan makna.</p>
-        <p className="mx-auto max-w-2xl text-sm text-muted sm:text-base">
-          Sistem Temu Kembali Skripsi Berbahasa Indonesia (BM25 vs IndoSBERT) · Universitas Jember
-        </p>
       </div>
 
       <SearchBox variant="hero" autoFocus />
